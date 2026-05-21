@@ -1,0 +1,20 @@
+# Python Cache
+__pycache__/
+.ruff_cache/
+.pytest_cache/
+*.py[cod]
+
+# Virtual Environment
+.venv/
+
+# Runtime Memory
+.memory.json
+
+# Environment Variables
+.env
+
+# IDE
+.vscode/
+
+# Build_Cache
+*.egg-info/
