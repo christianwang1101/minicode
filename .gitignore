@@ -18,3 +18,6 @@ __pycache__/
 
 # Build_Cache
 *.egg-info/
+
+# Macbook System Files
+.DS_Store
