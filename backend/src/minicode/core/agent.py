@@ -1,12 +1,12 @@
 import json
 from typing import List, Dict, Any
-from src.llm.client import ModelClient
-from src.memory.context import Context
-from src.memory.context import Messages
-from src.runtime.step_controller import StepController
-from src.tools.registry import ToolRegistry
-from src.tools.runner import ToolRunner
-from src import config
+from minicode.llm.client import ModelClient
+from minicode.memory.context import Context
+from minicode.memory.context import Messages
+from minicode.runtime.step_controller import StepController
+from minicode.tools.registry import ToolRegistry
+from minicode.tools.runner import ToolRunner
+from minicode import config
 
 
 class Agent:

@@ -1,7 +1,7 @@
-from src.llm.providers.qwen import QwenProvider
-from src.llm.providers.glm import GLMProvider
-from src.llm.router import ModelRouter
-from src.memory.context import Messages
+from minicode.llm.providers.qwen import QwenProvider
+from minicode.llm.providers.glm import GLMProvider
+from minicode.llm.router import ModelRouter
+from minicode.memory.context import Messages
 
 class ModelClient:
     def __init__(self, router: ModelRouter):

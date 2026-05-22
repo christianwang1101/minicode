@@ -1,6 +1,6 @@
 import ast
 from pathlib import Path
-from src.tools.decorator import tool
+from minicode.tools.decorator import tool
 
 
 IGNORE_DIRS = {".git", "__pycache__", ".venv", "node_modules"}

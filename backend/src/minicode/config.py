@@ -1,7 +1,14 @@
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
+# Load .env located at the repository backend directory (robust to working dir)
+env_path = Path(__file__).resolve().parents[2] / ".env"
+if env_path.exists():
+    load_dotenv(dotenv_path=str(env_path))
+else:
+    # fallback to default behavior
+    load_dotenv()
 
 __all__ = [
     "QWEN_ENDPOINT",

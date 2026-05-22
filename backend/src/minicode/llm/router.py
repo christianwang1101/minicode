@@ -1,6 +1,6 @@
-from src import config
-from src.llm.providers.qwen import QwenProvider
-from src.llm.providers.glm import GLMProvider
+from minicode import config
+from minicode.llm.providers.qwen import QwenProvider
+from minicode.llm.providers.glm import GLMProvider
 
 
 class ModelRouter:

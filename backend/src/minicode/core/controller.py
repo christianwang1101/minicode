@@ -1,8 +1,8 @@
 from typing import Optional, Dict, Any
 
-from src.core.agent import Agent
-from src.plan.planner import PlanGenerator
-from src.plan.builder import Builder
+from minicode.core.agent import Agent
+from minicode.plan.planner import PlanGenerator
+from minicode.plan.builder import Builder
 
 
 class Controller:

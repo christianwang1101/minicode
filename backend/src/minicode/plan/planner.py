@@ -1,8 +1,8 @@
 import json
 import re
 from typing import List, Dict, Any
-from src.plan.schema import Plan, PlanStep, StepStatus
-from src.llm.client import ModelClient
+from minicode.plan.schema import Plan, PlanStep, StepStatus
+from minicode.llm.client import ModelClient
 
 
 class PlanGenerator:

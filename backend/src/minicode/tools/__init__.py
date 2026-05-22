@@ -1,3 +1,3 @@
-from src.tools.loader import load_tools
+from minicode.tools.loader import load_tools
 
 load_tools()

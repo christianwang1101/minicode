@@ -11,7 +11,7 @@ dependencies = [
     "ruff>=0.15.7",
 ]
 
-[project.scripts]`
+[project.scripts]
 minicode = "src.main:main"
 
 [build-system]

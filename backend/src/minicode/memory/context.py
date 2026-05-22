@@ -1,13 +1,13 @@
 import json
 from pathlib import Path
 from typing import List, Dict, Any
-from src import config
+from minicode import config
 
 Messages = List[Dict[str, Any]]
 
 class Context:
     def __init__(self, memory_limit: int = config.MEMORY_LIMIT):
-        self.path = Path(__file__).parent.parent.parent / config.MEMORY_FILE
+        self.path = Path(__file__).parent.parent.parent.parent / config.MEMORY_FILE
         self.memory_limit = memory_limit
         self.messages: List[Dict[str, Any]] = []
 

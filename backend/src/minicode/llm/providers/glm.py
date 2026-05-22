@@ -1,7 +1,7 @@
 import requests
 import json
-from src import config
-from src.memory.context import Messages
+from minicode import config
+from minicode.memory.context import Messages
 
 
 class GLMProvider:

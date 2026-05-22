@@ -1,7 +1,7 @@
 import ast
 from pathlib import Path
-from src.tools.decorator import tool
-from src.tools.ignore import should_ignore
+from minicode.tools.decorator import tool
+from minicode.tools.ignore import should_ignore
 
 
 def parse_file(file_path: Path):

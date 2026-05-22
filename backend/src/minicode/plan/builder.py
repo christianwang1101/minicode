@@ -1,6 +1,6 @@
 from typing import Optional, Dict, Any
 
-from src.plan.schema import Plan, StepStatus
+from minicode.plan.schema import Plan, StepStatus
 
 
 class Builder:

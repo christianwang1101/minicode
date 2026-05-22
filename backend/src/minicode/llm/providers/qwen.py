@@ -1,6 +1,6 @@
 import requests
 import json
-from src import config
+from minicode import config
 
 
 class QwenProvider:

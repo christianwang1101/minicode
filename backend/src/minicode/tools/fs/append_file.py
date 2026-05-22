@@ -1,4 +1,4 @@
-from src.tools.decorator import tool
+from minicode.tools.decorator import tool
 
 
 @tool

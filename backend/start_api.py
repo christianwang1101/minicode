@@ -1,20 +1,20 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import StreamingResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from src import config
-from src.core.agent import Agent
-from src.core.controller import Controller
-from src.llm.client import ModelClient
-from src.llm.providers.glm import GLMProvider
-from src.llm.providers.qwen import QwenProvider
-from src.llm.router import ModelRouter
-from src.memory.context import Context
-from src.plan.planner import PlanGenerator
-from src.plan.builder import Builder
-from src.runtime.step_controller import StepController
-from src.tools.loader import load_tools
-from src.tools.registry import get_registry
-from src.tools.runner import ToolRunner
+from minicode import config
+from minicode.core.agent import Agent
+from minicode.core.controller import Controller
+from minicode.llm.client import ModelClient
+from minicode.llm.providers.glm import GLMProvider
+from minicode.llm.providers.qwen import QwenProvider
+from minicode.llm.router import ModelRouter
+from minicode.memory.context import Context
+from minicode.plan.planner import PlanGenerator
+from minicode.plan.builder import Builder
+from minicode.runtime.step_controller import StepController
+from minicode.tools.loader import load_tools
+from minicode.tools.registry import get_registry
+from minicode.tools.runner import ToolRunner
 import json
 
 
