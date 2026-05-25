@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [project.scripts]
-minicode = "src.main:main"
+minicode = "minicode.main:main"
 
 [build-system]
 requires = ["setuptools>=61.0"]

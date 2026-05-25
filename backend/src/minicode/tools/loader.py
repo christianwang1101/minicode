@@ -12,7 +12,7 @@ def load_tools():
 
     _loaded = True
 
-    package_name = "src.tools"
+    package_name = "minicode.tools"
     package = __import__(package_name, fromlist=[""])
 
     for _, module_name, _ in pkgutil.walk_packages(
