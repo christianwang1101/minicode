@@ -1,38 +1,39 @@
 <template>
   <div class="layout" :class="{ 'is-resizing': !!resizing }">
-    <!-- Sidebar -->
-    <div
-      class="sidebar"
-      :class="{ 'is-collapsed': isSidebarCollapsed }"
-      :style="{ width: isSidebarCollapsed ? COLLAPSED_WIDTH + 'px' : sidebarWidth + 'px' }"
-    >
-      <Sidebar v-if="!isSidebarCollapsed" />
-      <!-- 左侧折叠按钮 -->
-      <button class="toggle-btn left" @click="toggleSidebar">
-        {{ isSidebarCollapsed ? '▶' : '◀' }}
-      </button>
+    <!-- Topbar -->
+    <div class="topbar">
+      <div class="logo">MINICODE V1.12.5</div>
     </div>
 
-    <!-- 左侧 resizer -->
-    <div v-if="!isSidebarCollapsed" class="resizer" @mousedown="startLeftResize"></div>
-
-    <!-- Editor -->
-    <div class="editor" :style="{ width: editorWidth + 'px' }">
-      <Editor />
-    </div>
-
-    <!-- Chat 固定宽度 360px + 折叠按钮 -->
-    <div class="chat-wrapper">
+    <!-- 主内容区 -->
+    <div class="main">
+      <!-- Sidebar -->
       <div
-        class="chat"
-        :style="{ width: isChatCollapsed ? '0px' : CHAT_WIDTH + 'px' }"
+        class="sidebar"
+        :class="{ 'is-collapsed': isSidebarCollapsed }"
+        :style="{ width: isSidebarCollapsed ? COLLAPSED_WIDTH + 'px' : sidebarWidth + 'px' }"
       >
-        <Chat v-if="!isChatCollapsed" />
+        <Sidebar v-show="!isSidebarCollapsed" />
+        <!-- 左侧折叠按钮 -->
+        <button class="toggle-btn left" @click="toggleSidebar">
+          {{ isSidebarCollapsed ? '▶' : '◀' }}
+        </button>
       </div>
-      <!-- 折叠按钮永远显示，靠内 -->
-      <button class="toggle-btn right" @click="toggleChat">
-        {{ isChatCollapsed ? '▶' : '◀' }}
-      </button>
+
+      <!-- 左侧 resizer -->
+      <div v-if="!isSidebarCollapsed" class="resizer" @mousedown="startLeftResize"></div>
+
+      <!-- Editor -->
+      <div class="editor" :style="{ width: editorWidth + 'px' }">
+        <Editor />
+      </div>
+
+      <!-- Chat 固定宽度 360px -->
+      <div class="chat-wrapper">
+        <div class="chat" :style="{ width: CHAT_WIDTH + 'px' }">
+          <Chat />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -53,7 +54,6 @@ const CHAT_WIDTH = 360 // 固定宽度
 const sidebarWidth = ref(Number(localStorage.getItem('sidebarWidth')) || 260)
 const editorWidth = ref(0)
 const isSidebarCollapsed = ref(false)
-const isChatCollapsed = ref(false)
 const resizing = ref(null)
 
 // 保存 Sidebar 宽度
@@ -67,26 +67,19 @@ function toggleSidebar() {
   updateEditorWidth()
 }
 
-// 右侧折叠/展开
-function toggleChat() {
-  isChatCollapsed.value = !isChatCollapsed.value
-  updateEditorWidth()
-}
-
 // 计算 Editor 宽度
 function updateEditorWidth() {
   const activeSidebarWidth = isSidebarCollapsed.value ? COLLAPSED_WIDTH : sidebarWidth.value
-  const activeChatWidth = isChatCollapsed.value ? 0 : CHAT_WIDTH
   editorWidth.value = Math.max(
     MIN_EDITOR,
-    window.innerWidth - activeSidebarWidth - activeChatWidth - 6 // 6px 左 resizer
+    window.innerWidth - activeSidebarWidth - CHAT_WIDTH - 6 // 6px 左 resizer
   )
 }
 
 // 拖拽逻辑（只针对左侧 Sidebar）
 function onMouseMove(e) {
   if (!resizing.value) return
-  const maxAllowed = window.innerWidth - (isChatCollapsed.value ? 0 : CHAT_WIDTH) - MIN_EDITOR
+  const maxAllowed = window.innerWidth - CHAT_WIDTH - MIN_EDITOR
   sidebarWidth.value = Math.max(MIN_SIDEBAR, Math.min(maxAllowed, e.clientX))
   updateEditorWidth()
 }
@@ -123,10 +116,35 @@ onUnmounted(() => {
 <style scoped>
 .layout {
   display: flex;
+  flex-direction: column;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
   background: #0f1117;
+}
+
+.topbar {
+  height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0f1117;
+  border-bottom: 1px solid #21262d;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #58a6ff;
+  user-select: none;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+  min-height: 0;
 }
 
 .sidebar {
@@ -155,21 +173,13 @@ onUnmounted(() => {
   background: #151822;
   transition: width 0.2s;
   overflow: hidden;
-}
-
-/* Chat 折叠按钮靠内 */
-.chat-wrapper .toggle-btn.right {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  z-index: 20;
-  padding: 4px 8px;
-  font-size: 14px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* 左侧 resizer */
 .resizer {
-  width: 6px;
+  width: 3px;
   cursor: col-resize;
   background: transparent;
   position: relative;
@@ -196,14 +206,15 @@ body.is-resizing .resizer {
 /* 按钮样式 */
 .toggle-btn {
   position: absolute;
-  top: 10px;
+  bottom: 10px;
   z-index: 20;
   background: #21262d;
   border: 1px solid #30363d;
   color: white;
   cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: 1px 2px;
+  border-radius: 3px;
+  font-size: 10px;
 }
 .toggle-btn.left { right: 10px; }
 </style>

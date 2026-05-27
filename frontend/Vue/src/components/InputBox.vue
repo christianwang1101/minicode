@@ -76,17 +76,18 @@ function autoResize() {
 
 textarea {
   width: 100%;
-  min-height: 40px;
-  padding: 10px;
-  border: none;             /* 内层去掉边框，让外层负责圆角和边框 */
+  min-height: 36px;
+  padding: 8px 10px;
+  border: none;
   resize: none;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: inherit;
   font-size: 13px;
+  line-height: 1.5;
   outline: none;
   box-sizing: border-box;
   background: transparent;
   color: #e5e7eb;
-  overflow-y: hidden;       /* 自动高度初始隐藏滚动条 */
+  overflow-y: auto;
   max-height: 200px;
 }
 

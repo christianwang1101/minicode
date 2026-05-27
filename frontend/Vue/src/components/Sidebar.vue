@@ -1,18 +1,18 @@
 <template>
   <div class="sidebar">
-    <div class="select-root">
-      <label>
-        Select Root Directory:
+    <div v-if="!treeData.length" class="empty-state">
+      <label class="empty-clickable">
         <input type="file" webkitdirectory @change="onSelectRoot" />
+        <span class="empty-icon">📝</span>
+        <span class="empty-text">Select a folder...</span>
       </label>
-      <div v-if="uiState.rootPath">Root: {{ uiState.rootPath }}</div>
     </div>
 
-    <ul class="file-tree">
-      <FileNode 
-        v-for="node in treeData" 
-        :key="node.path" 
-        :node="node" 
+    <ul v-else class="file-tree">
+      <FileNode
+        v-for="node in treeData"
+        :key="node.path"
+        :node="node"
       />
     </ul>
   </div>
@@ -20,8 +20,6 @@
 
 <script setup>
 import { ref } from 'vue'
-import { uiState } from '../stores/uiState'
-import { uiActions } from '../stores/uiActions'
 import FileNode from './FileNode.vue'
 
 const treeData = ref([])
@@ -71,10 +69,40 @@ function onSelectRoot(event) {
   overflow-y: auto;
 }
 
-.select-root {
-  background-color: white;
-  padding: 4px 6px;
-  flex-shrink: 0;
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #484f58;
+  user-select: none;
+}
+
+.empty-clickable {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.empty-clickable input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.empty-icon {
+  font-size: 24px;
+}
+
+.empty-text {
+  font-size: 14px;
 }
 
 .file-tree {

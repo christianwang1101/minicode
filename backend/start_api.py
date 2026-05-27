@@ -7,6 +7,7 @@ from minicode.core.controller import Controller
 from minicode.llm.client import ModelClient
 from minicode.llm.providers.glm import GLMProvider
 from minicode.llm.providers.qwen import QwenProvider
+from minicode.llm.providers.deepseek import DeepSeekProvider
 from minicode.llm.router import ModelRouter
 from minicode.memory.context import Context
 from minicode.plan.planner import PlanGenerator
@@ -26,7 +27,7 @@ def _create_controller():
     runner = ToolRunner(registry)
     step_controller = StepController(config.MAX_STEP)
 
-    providers: dict[str, QwenProvider | GLMProvider] = {
+    providers: dict[str, QwenProvider | GLMProvider | DeepSeekProvider] = {
         "qwen": QwenProvider(
             api_key=config.QWEN_API_KEY,
             model=config.QWEN_MODEL,
@@ -36,6 +37,11 @@ def _create_controller():
             api_key=config.GLM_API_KEY,
             model=config.GLM_MODEL,
             endpoint=config.GLM_ENDPOINT,
+        ),
+        "deepseek": DeepSeekProvider(
+            api_key=config.DEEPSEEK_API_KEY,
+            model=config.DEEPSEEK_MODEL,
+            endpoint=config.DEEPSEEK_ENDPOINT,
         ),
     }
 

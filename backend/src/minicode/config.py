@@ -17,6 +17,9 @@ __all__ = [
     "GLM_ENDPOINT",
     "GLM_API_KEY",
     "GLM_MODEL",
+    "DEEPSEEK_ENDPOINT",
+    "DEEPSEEK_API_KEY",
+    "DEEPSEEK_MODEL",
     "PRIMARY_PROVIDER",
     "FALLBACK_PROVIDER",
     "PROVIDERS",
@@ -30,7 +33,7 @@ __all__ = [
 # =========================
 # LLM Providers
 # =========================
-PROVIDERS = ["qwen", "glm"]
+PROVIDERS = ["qwen", "glm", "deepseek"]
 
 
 QWEN_ENDPOINT = os.getenv("QWEN_ENDPOINT", "")
@@ -41,6 +44,11 @@ QWEN_MODEL = os.getenv("QWEN_MODEL", "qwen-plus")
 GLM_ENDPOINT = os.getenv("GLM_ENDPOINT", "")
 GLM_API_KEY = os.getenv("GLM_API_KEY", "")
 GLM_MODEL = os.getenv("GLM_MODEL", "glm-4")
+
+
+DEEPSEEK_ENDPOINT = os.getenv("DEEPSEEK_ENDPOINT", "")
+DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY", "")
+DEEPSEEK_MODEL = os.getenv("DEEPSEEK_MODEL", "deepseek-chat")
 
 
 # =========================

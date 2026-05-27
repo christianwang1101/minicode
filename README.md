@@ -1,4 +1,4 @@
-# MiniCode
+# Minicode
 
 MiniCode is a minimal AI coding assistant with a Vue frontend, a FastAPI backend, and a tool-driven agent loop that can plan, inspect, and modify code. It is designed to be lightweight, local-first, and easy to extend with additional tools or model providers.
 
@@ -71,7 +71,7 @@ From the `backend` directory:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-uv sync.
+uv sync
 ```
 
 If you use a `.env` file, place it in `backend/.env`.

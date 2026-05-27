@@ -12,7 +12,7 @@
       <span class="node-text">{{ props.node.name }}</span>
     </div>
 
-    <ul v-if="props.node.isFolder && props.node.expanded" class="child-nodes">
+    <ul v-show="props.node.isFolder && props.node.expanded" class="child-nodes">
       <FileNode 
         v-for="child in props.node.children" 
         :key="child.path" 

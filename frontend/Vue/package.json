@@ -1,5 +1,5 @@
 {
-  "name": "package",
+  "name": "vue",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -9,13 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "highlight.js": "^11.11.1",
+    "markdown-it": "^14.2.0",
     "monaco-editor": "^0.55.1",
-    "vue": "^3.5.32"
+    "vue": "^3.5.29"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.6",
-    "vite": "^8.0.8",
-    "vite-plugin-vue-devtools": "^8.1.1"
+    "@vitejs/plugin-vue": "^6.0.4",
+    "vite": "^7.3.1",
+    "vite-plugin-vue-devtools": "^8.0.6"
   },
   "engines": {
     "node": "^20.19.0 || >=22.12.0"

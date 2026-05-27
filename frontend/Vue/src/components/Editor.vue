@@ -100,7 +100,7 @@ onUnmounted(()=>{ disposeAll() })
 .editor-wrapper{flex:1;height:100%;position:relative;background:#0f1117}
 .editor-container{width:100%;height:100%;box-shadow:none}
 .empty-state{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#484f58;pointer-events:none}
-.empty-icon{font-size:48px;margin-bottom:12px}
+.empty-icon{font-size:24px;margin-bottom:12px}
 .empty-text{font-size:14px}
 .editor-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#0f1117;color:#8b949e;gap:12px}
 .loading-spinner{width:24px;height:24px;border:2px solid #30363d;border-top-color:#58a6ff;border-radius:50%;animation:spin 1s linear infinite}
