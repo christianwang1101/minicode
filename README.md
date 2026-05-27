@@ -26,11 +26,11 @@ The assistant can work in two modes:
 
 ## Architecture And Workflow
 
-The runtime starts in `backend/start_api.py`, which builds the controller stack in this order:
+The runtime starts in `backend/src/minicode/main.py`, which builds the controller stack in this order:
 
 1. Load all tool modules from `minicode.tools`.
 2. Create shared memory, tool registry, and tool runner instances.
-3. Configure model providers for Qwen and GLM.
+3. Configure model providers for Qwen, GLM, and DeepSeek.
 4. Route provider selection through `ModelRouter`.
 5. Create the agent, planner, and builder.
 6. Expose the FastAPI app with `/`, `/ping`, and `/chat` endpoints.
@@ -59,6 +59,9 @@ Optional but recommended environment variables for the backend:
 - `GLM_API_KEY`
 - `GLM_ENDPOINT`
 - `GLM_MODEL`
+- `DEEPSEEK_API_KEY`
+- `DEEPSEEK_ENDPOINT`
+- `DEEPSEEK_MODEL`
 - `PRIMARY_PROVIDER`
 - `FALLBACK_PROVIDER`
 
@@ -105,7 +108,17 @@ npm run dev
 
 The Vite dev server proxies `/chat` and `/ping` to the backend on port `8000`.
 
-### One-Click Launch On macOS
+### One-Click Launch (Recommended)
+
+After installing the backend (see below), run from any path:
+
+```bash
+minicode
+```
+
+This starts both the backend and frontend simultaneously and opens the browser automatically. Press `Ctrl+C` to stop both.
+
+### One-Click Launch On macOS (Legacy)
 
 The root `start_api.sh` script opens separate Terminal windows for the frontend and backend. It uses `osascript`, so it is macOS-specific.
 
@@ -117,9 +130,9 @@ The root `start_api.sh` script opens separate Terminal windows for the frontend 
 
 ## Agent Configurations
 
-The backend agent is configured in `backend/src/minicode/config.py` and `backend/start_api.py`.
+The backend agent is configured in `backend/src/minicode/config.py` and `backend/src/minicode/main.py`.
 
-- Provider list: `qwen`, `glm`
+- Provider list: `qwen`, `glm`, `deepseek`
 - Provider routing: `PRIMARY_PROVIDER` and `FALLBACK_PROVIDER`
 - Step limit: `MAX_STEP = 4`
 - Tool loop limit: `MAX_TOOL_LOOP = 4`
@@ -131,7 +144,7 @@ The tool system is loaded dynamically by walking `minicode.tools`, so adding a n
 
 ## Limitations
 
-- The launcher script is macOS-only because it depends on `osascript`.
+- The `start_api.sh` launcher script is macOS-only because it depends on `osascript`. The `minicode` CLI works on any platform.
 - The agent depends on external LLM endpoints and valid API credentials.
 - `plan` mode intentionally disables write-capable tools.
 - Conversation state is in-memory and limited by the configured memory cap.
@@ -143,6 +156,8 @@ The tool system is loaded dynamically by walking `minicode.tools`, so adding a n
 ```text
 backend/
 	src/minicode/
+		main.py      # API entry point and FastAPI app
+		config.py    # environment config and agent limits
 		core/        # agent and controller orchestration
 		llm/         # providers, router, and client wrappers
 		memory/      # conversation context management
